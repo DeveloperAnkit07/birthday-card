@@ -1,13 +1,22 @@
 body {
   margin: 0;
   height: 100vh;
-  background: #fbb6ce;
+  background: linear-gradient(270deg, #fbb6ce, #ffdde1, #fbb6ce);
+  background-size: 600% 600%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Comic Sans MS', cursive, sans-serif;
   overflow: hidden;
+  animation: bgMove 15s ease infinite;
+}
+
+/* Background gradient animation */
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Fairy lights */
@@ -29,12 +38,8 @@ body {
 }
 
 @keyframes flicker {
-  from {
-    opacity: 0.8;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0.7; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.1); }
 }
 
 /* Hanging Happy Birthday letters */
@@ -46,7 +51,7 @@ body {
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  font-size: 6vw; /* responsive font */
+  font-size: 6vw;
   color: #ff69b4;
   font-weight: bold;
   z-index: 2;
@@ -56,6 +61,28 @@ body {
 .hanging-text span {
   position: relative;
   display: inline-block;
+  transform: translateY(-50px);
+  opacity: 0;
+  animation: dropIn 1s forwards;
+}
+
+.hanging-text span:nth-child(1){ animation-delay: 0.2s; }
+.hanging-text span:nth-child(2){ animation-delay: 0.4s; }
+.hanging-text span:nth-child(3){ animation-delay: 0.6s; }
+.hanging-text span:nth-child(4){ animation-delay: 0.8s; }
+.hanging-text span:nth-child(5){ animation-delay: 1s; }
+.hanging-text span:nth-child(6){ animation-delay: 1.2s; }
+.hanging-text span:nth-child(7){ animation-delay: 1.4s; }
+.hanging-text span:nth-child(8){ animation-delay: 1.6s; }
+.hanging-text span:nth-child(9){ animation-delay: 1.8s; }
+.hanging-text span:nth-child(10){ animation-delay: 2s; }
+.hanging-text span:nth-child(11){ animation-delay: 2.2s; }
+.hanging-text span:nth-child(12){ animation-delay: 2.4s; }
+.hanging-text span:nth-child(13){ animation-delay: 2.6s; }
+.hanging-text span:nth-child(14){ animation-delay: 2.8s; }
+
+@keyframes dropIn {
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .hanging-text span::before {
@@ -73,19 +100,20 @@ body {
 .curtain {
   position: absolute;
   top: 0;
-  width: 80px;
+  width: 50%;
   height: 100%;
   background: linear-gradient(to bottom, #ff7eb9, #ffb6d5);
   border-radius: 0 0 40px 40px;
-  z-index: 1;
+  z-index: 3;
+  animation: openCurtains 2s ease forwards;
 }
 
-.curtain.left {
-  left: 0;
-}
+.curtain.left { left: 0; border-radius: 0 40px 40px 0; }
+.curtain.right { right: 0; border-radius: 40px 0 0 40px; }
 
-.curtain.right {
-  right: 0;
+@keyframes openCurtains {
+  from { width: 50%; }
+  to { width: 80px; }
 }
 
 /* Cake Image */
@@ -101,12 +129,19 @@ body {
 }
 
 .cake:hover {
-  transform: scale(1.08);
+  transform: scale(1.1) rotate(-2deg);
 }
 
 .cake img {
   width: 100%;
   height: auto;
+  filter: drop-shadow(0 0 15px gold);
+  animation: cakeGlow 2s infinite alternate;
+}
+
+@keyframes cakeGlow {
+  from { filter: drop-shadow(0 0 10px gold); }
+  to { filter: drop-shadow(0 0 25px orange); }
 }
 
 /* Flame */
@@ -123,14 +158,8 @@ body {
 }
 
 @keyframes flickerFlame {
-  from {
-    transform: translateX(-50%) scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-50%) scale(1.2);
-    opacity: 0.8;
-  }
+  from { transform: translateX(-50%) scale(1); opacity: 1; }
+  to { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
 }
 
 /* Smoke */
@@ -148,27 +177,49 @@ body {
 }
 
 @keyframes rise {
-  0% {
-    opacity: 0.7;
-    transform: translate(-50%, 0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50px) scale(1.5);
-  }
+  0% { opacity: 0.7; transform: translate(-50%, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-50%, -50px) scale(1.5); }
 }
 
 /* Glowing text */
 .message {
   position: absolute;
   bottom: 40px;
-  font-size: 7vw; /* responsive */
+  font-size: 7vw;
   color: gold;
   text-shadow: 2px 2px 8px black;
   opacity: 0;
-  transition: opacity 2s ease;
   text-align: center;
   padding: 0 10px;
+  animation: fadeIn 2s forwards 2s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+.message span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: bounceIn 0.6s forwards;
+}
+
+.message span:nth-child(1){ animation-delay: 2.2s; }
+.message span:nth-child(2){ animation-delay: 2.4s; }
+.message span:nth-child(3){ animation-delay: 2.6s; }
+.message span:nth-child(4){ animation-delay: 2.8s; }
+.message span:nth-child(5){ animation-delay: 3s; }
+.message span:nth-child(6){ animation-delay: 3.2s; }
+.message span:nth-child(7){ animation-delay: 3.4s; }
+.message span:nth-child(8){ animation-delay: 3.6s; }
+.message span:nth-child(9){ animation-delay: 3.8s; }
+.message span:nth-child(10){ animation-delay: 4s; }
+
+@keyframes bounceIn {
+  0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+  60% { opacity: 1; transform: translateY(-10px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
 }
 
 /* Confetti */
@@ -184,28 +235,17 @@ body {
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0.9;
-  }
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0.9; }
 }
 
 /* Responsive Tweaks */
 @media (max-width: 768px) {
-  .curtain {
-    width: 60px;
-  }
+  .curtain { width: 60px; }
 }
 
 @media (max-width: 480px) {
-  .hanging-text {
-    font-size: 5vw;
-    gap: 6px;
-  }
-  .cake {
-    margin-top: 90px;
-  }
-  .message {
-    font-size: 6vw;
-  }
+  .hanging-text { font-size: 5vw; gap: 6px; }
+  .cake { margin-top: 90px; }
+  .message { font-size: 6vw; }
 }
+
