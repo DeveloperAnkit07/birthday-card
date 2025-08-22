@@ -1,0 +1,211 @@
+body {
+  margin: 0;
+  height: 100vh;
+  background: #fbb6ce;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  overflow: hidden;
+}
+
+/* Fairy lights */
+.lights {
+  position: absolute;
+  top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.bulb {
+  width: 15px;
+  height: 25px;
+  background: gold;
+  border-radius: 50%;
+  box-shadow: 0 0 15px gold;
+  animation: flicker 1s infinite alternate;
+}
+
+@keyframes flicker {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Hanging Happy Birthday letters */
+.hanging-text {
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 6vw; /* responsive font */
+  color: #ff69b4;
+  font-weight: bold;
+  z-index: 2;
+  text-align: center;
+}
+
+.hanging-text span {
+  position: relative;
+  display: inline-block;
+}
+
+.hanging-text span::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  width: 2px;
+  height: 30px;
+  background: #444;
+  transform: translateX(-50%);
+}
+
+/* Curtains */
+.curtain {
+  position: absolute;
+  top: 0;
+  width: 80px;
+  height: 100%;
+  background: linear-gradient(to bottom, #ff7eb9, #ffb6d5);
+  border-radius: 0 0 40px 40px;
+  z-index: 1;
+}
+
+.curtain.left {
+  left: 0;
+}
+
+.curtain.right {
+  right: 0;
+}
+
+/* Cake Image */
+.cake {
+  position: relative;
+  width: 40vw;
+  max-width: 220px;
+  min-width: 120px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  z-index: 2;
+  margin-top: 120px;
+}
+
+.cake:hover {
+  transform: scale(1.08);
+}
+
+.cake img {
+  width: 100%;
+  height: auto;
+}
+
+/* Flame */
+.flame {
+  width: 10px;
+  height: 15px;
+  background: gold;
+  border-radius: 50%;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: flickerFlame 0.3s infinite alternate;
+}
+
+@keyframes flickerFlame {
+  from {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-50%) scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Smoke */
+.smoke {
+  width: 8px;
+  height: 20px;
+  background: rgba(200, 200, 200, 0.6);
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: rise 1.5s forwards;
+}
+
+@keyframes rise {
+  0% {
+    opacity: 0.7;
+    transform: translate(-50%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50px) scale(1.5);
+  }
+}
+
+/* Glowing text */
+.message {
+  position: absolute;
+  bottom: 40px;
+  font-size: 7vw; /* responsive */
+  color: gold;
+  text-shadow: 2px 2px 8px black;
+  opacity: 0;
+  transition: opacity 2s ease;
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  top: -10px;
+  width: 10px;
+  height: 10px;
+  background: red;
+  opacity: 0.8;
+  animation: fall linear forwards;
+  z-index: 3;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.9;
+  }
+}
+
+/* Responsive Tweaks */
+@media (max-width: 768px) {
+  .curtain {
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hanging-text {
+    font-size: 5vw;
+    gap: 6px;
+  }
+  .cake {
+    margin-top: 90px;
+  }
+  .message {
+    font-size: 6vw;
+  }
+}
